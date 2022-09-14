@@ -17,98 +17,124 @@ variable "subscription_id" {
   type    = string
   default = ""
 }
+
 #====================================================
 
+variable "tags" {
+  type        = map(string)
+  description = "Tags used for the deployment."
+  default = {
+    "source" = ""
+    "env"    = ""
+  }
+}
 
-variable "resource_group" {
-  description = "input for resource groups"
+variable "location" {
   type = object({
-    name     = string
-    location = string
+    main      = string
+    short     = string
+    secondary = string
+    sec_short = string
   })
 }
 
-variable "tags" {
-  description = "Tags used for the deployment."
+
+
+variable "resource_groups" {
+  description = "Resource groups to create"
   type = map(object({
-    source      = string
-    environment = string
-    app         = string
+    sub      = string
+    name     = string
+    location = string
   }))
   default = {
-    module = {
-      source      = ""
-      environment = ""
-      app         = ""
+    rg_1 = {
+      sub      = ""
+      name     = ""
+      location = ""
+    }
+    rg_2 = {
+      sub      = ""
+      name     = ""
+      location = ""
+    }
+    rg_3 = {
+      sub      = ""
+      name     = ""
+      location = ""
+    }
+    rg_4 = {
+      sub      = ""
+      name     = ""
+      location = ""
+    }
+    rg_5 = {
+      sub      = ""
+      name     = ""
+      location = ""
     }
   }
 }
 
-variable "vnet_name" {
-  type        = string
-  description = "Name of vnet"
-  default     = ""
-}
 
-variable "vnet_address_space" {
-  type        = list(any)
-  description = "the adress space of the vnet"
-  default     = [""]
-}
+
 
 
 variable "vnets" {
-  type = map(any)
+  type = map(object({
+    name          = string
+    address_space = list(string)
+  }))
   default = {
     vnet_1 = {
       name          = ""
-      address_space = ""
+      address_space = [""]
     }
     vnet_2 = {
       name          = ""
-      address_space = ""
+      address_space = [""]
     }
     vnet_3 = {
       name          = ""
-      address_space = ""
+      address_space = [""]
     }
     vnet_4 = {
       name          = ""
-      address_space = ""
+      address_space = [""]
     }
     vnet_5 = {
       name          = ""
-      address_space = ""
+      address_space = [""]
     }
   }
 }
 
 
-variable "subnets" {
-  type = map(any)
-  default = {
-    subnet_1 = {
-      name             = ""
-      address_prefixes = ""
-    }
-    subnet_2 = {
-      name             = ""
-      address_prefixes = ""
-    }
-    subnet_3 = {
-      name             = ""
-      address_prefixes = ""
-    }
-    bastion_subnet = {
-      name             = ""
-      address_prefixes = ""
-    }
-  }
-}
+# variable "subnets" {
+#   type = map(any)
+#   default = {
+#     subnet_1 = {
+#       name             = ""
+#       address_prefixes = ""
+#     }
+#     subnet_2 = {
+#       name             = ""
+#       address_prefixes = ""
+#     }
+#     subnet_3 = {
+#       name             = ""
+#       address_prefixes = ""
+#     }
+#     bastion_subnet = {
+#       name             = ""
+#       address_prefixes = ""
+#     }
+#   }
+# }
 
 
-variable "bastionhost_name" {
-  type        = string
-  description = "Name of bastion host"
-  default     = ""
-}
+# variable "bastionhost_name" {
+#   type        = string
+#   description = "Name of bastion host"
+#   default     = ""
+# }
